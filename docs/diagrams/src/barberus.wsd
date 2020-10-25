@@ -1,0 +1,57 @@
+@startuml barberus
+package "ClientPage" {
+  [Appointment]->[Add to google calendar]
+  [Past Barbers]->[Barber]
+}
+
+package "BarberPage" {
+  [Name]
+  [Certification]
+  [Rate]
+  [Email]
+  [Specializations]
+  [Calendar] -> [Google Calendar API]
+}
+
+package "HomePage" {
+  [Location Widget]
+  [Barbers Near You]
+  [Results]->[Result]
+  [Pagination]
+}
+
+package "LoginPage" {
+  [PassportJS]->[Facebook]
+  [PassportJS]->[Google]
+}
+
+package "SearchPage" {
+  [Search Bar]
+  [Price]
+  [Distance]
+  [Specializations]
+}
+
+package "APIService" {
+  [axios] -> [get]
+  [axios] -> [post]
+  [axios] -> [put]
+  [axios] -> [delete]
+  [get] ..> http : uses
+  [post] ..> http : uses
+  [put] ..> http : uses
+  [delete] ..> http : uses
+}
+
+package "Models" {
+  [Appointment]
+  [User]
+  [Barber]
+  [Client]
+}
+
+ClientPage -[hidden]---> BarberPage
+BarberPage -[hidden]---> HomePage
+HomePage -[hidden]--> LoginPage
+LoginPage -[hidden]--> SearchPage
+@enduml
