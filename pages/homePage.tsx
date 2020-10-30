@@ -1,7 +1,10 @@
+import styles from '../styles/home.module.scss'
+
 const HomePage = () => {
   return (
-    <div>
-      Home Page
+    <div className={styles.home}>
+      <div className={styles.intro}>Grooming needs here.</div>
+      <div><button>Get Started</button></div>
     </div>
   )
 }

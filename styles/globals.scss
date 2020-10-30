@@ -14,3 +14,13 @@ a {
 * {
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato'), url('../public/fonts/Lato.ttf') format('ttf');
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: local('Oswald'), url('../public/fonts/Oswald.ttf') format('ttf');
+}
