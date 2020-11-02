@@ -1,0 +1,55 @@
+@import "~bootstrap/scss/bootstrap";
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/Lato.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('/fonts/Oswald.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins.ttf');
+  font-style: normal;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body, body * {
+  font-family: 'Lato';
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.ghostButton {
+  background-color: transparent;
+  padding: 0.5em 2em;
+  color: #FFF;
+  border: 2px solid #FFF;
+  transition: 0.5s ease-in-out;
+
+  &:hover {
+    transition: 0.5s ease-in-out;
+    background-color: white;
+    color: #000;
+  }
+}
+
+$mobile: 480px;
+$tablets: 768px;

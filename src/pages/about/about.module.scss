@@ -1,0 +1,55 @@
+.about {
+  h1, h2 {
+    font-family: 'Poppins';
+    letter-spacing: -2pt;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: 40pt;
+  }
+
+  h2 {
+    font-size: 25pt;
+  }
+
+  .text {
+    font-size: 16pt;
+  }
+}
+
+.clientSection {
+  padding-bottom: 1.5rem;
+  background-color: black;
+  color: white;
+
+  .clientPane {
+    display: flex;
+
+    &.-right {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+.intro {
+  display: flex;
+  .introPane {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 5rem;
+  }
+
+  .introImage {
+    background: url('../../../public/images/cutting-hair.jpg') no-repeat center;
+    flex-basis: 50%;
+    background-size: cover;
+    height: 40rem;
+    width: 100%;
+  }
+}

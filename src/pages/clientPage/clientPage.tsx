@@ -3,9 +3,9 @@ const ClientPage = () => {
     <div>
       Client Page
     </div>
-  )
-}
+  );
+};
 
-ClientPage.displayName = 'Home Page'
+ClientPage.displayName = 'Home Page';
 
-export default ClientPage
+export default ClientPage;
