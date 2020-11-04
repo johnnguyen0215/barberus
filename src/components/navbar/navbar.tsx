@@ -1,17 +1,28 @@
 import styles from './navbar.module.scss';
-import { forwardRef } from 'react';
+import { forwardRef, MouseEvent, RefObject } from 'react';
+import scrollIntoView from 'scroll-into-view-if-needed';
 
-interface NavbarProps {
+export interface NavbarProps {
 
 }
 
-const Navbar = forwardRef<HTMLElement, NavbarProps>((props, ref) => {
-  const handleAboutClick = (event: Event) => {
+export interface NavRefObject {
+  [sectionType: string]: RefObject<HTMLElement | HTMLDivElement>
+}
+
+const Navbar = forwardRef<NavRefObject, NavbarProps>((props, ref) => {
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, section: string) => {
     event.preventDefault();
 
-    if (ref) {
-      ref.current.scrollIntoView({
-        behavior: 'smooth'
+    const navbarRef = (ref as RefObject<NavRefObject>).current || {};
+
+    const sectionRef = navbarRef[section];
+
+    if (sectionRef) {
+      scrollIntoView(sectionRef.current as Element, {
+        block: 'start',
+        behavior: 'smooth',
+        scrollMode: 'if-needed'
       });
     }
   };
@@ -21,9 +32,9 @@ const Navbar = forwardRef<HTMLElement, NavbarProps>((props, ref) => {
       <div className={`container ${styles.navbarContainer}`}>
         <div className={styles.title}>Barberus</div>
         <ul className={styles.navList}>
-          <a className={styles.navItem} href="">Home</a>
-          <a className={styles.navItem} href="" onClick={handleAboutClick}>About</a>
-          <a className={styles.navItem} href="">Contact</a>
+          <a className={styles.navItem} href="" onClick={(event) => { handleNavClick(event, 'home'); }}>Home</a>
+          <a className={styles.navItem} href="" onClick={(event) => { handleNavClick(event, 'about'); }}>About</a>
+          <a className={styles.navItem} href="" onClick={(event) => { handleNavClick(event, 'contact'); }}>Contact</a>
         </ul>
       </div>
     </nav>

@@ -1,8 +1,13 @@
 import styles from './home.module.scss';
+import { forwardRef } from 'react';
 
-const Home = () => {
+interface HomeProps {
+
+}
+
+const Home = forwardRef<HTMLDivElement, HomeProps>((props, homeSectionRef) => {
   return (
-    <div className={styles.home}>
+    <div className={styles.home} ref={homeSectionRef}>
       <div className="container">
         <div className="row">
           <div className={`col-6 offset-6 ${styles.introContainer}`}>
@@ -13,7 +18,7 @@ const Home = () => {
       </div>
     </div >
   );
-};
+});
 
 Home.displayName = 'Home Page';
 
