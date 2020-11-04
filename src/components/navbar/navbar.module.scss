@@ -1,12 +1,17 @@
 .navbar {
   position: fixed;
   width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 2px -2px;
+  height: 4rem;
+  color: #000;
+  z-index: 1000;
+  vertical-align: middle;
+  line-height: 4rem;
 }
-
 
 .navbarContainer {
   display: flex;
-  color: white;
   justify-content: space-between;
   align-items: center;
 

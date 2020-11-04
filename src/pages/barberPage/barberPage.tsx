@@ -3,9 +3,9 @@ const BarberPage = () => {
     <div>
       Barber Page
     </div>
-  )
-}
+  );
+};
 
-BarberPage.displayName = 'Home Page'
+BarberPage.displayName = 'Home Page';
 
-export default BarberPage
+export default BarberPage;

@@ -18,38 +18,91 @@
   }
 }
 
-.clientSection {
-  padding-bottom: 1.5rem;
-  background-color: black;
-  color: white;
+.textPane {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 5rem;
+}
 
-  .clientPane {
-    display: flex;
-
-    &.-right {
-      flex-direction: row-reverse;
-    }
-  }
+.imagePane {
+  flex-basis: 50%;
+  height: 40rem;
+  width: 100%;
 }
 
 .intro {
   display: flex;
-  .introPane {
-    flex-basis: 50%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 5rem;
-  }
 
-  .introImage {
+  .imagePane {
     background: url('../../../public/images/cutting-hair.jpg') no-repeat center;
-    flex-basis: 50%;
     background-size: cover;
-    height: 40rem;
-    width: 100%;
+  }
+}
+
+.sectionRow {
+  display: flex;
+}
+
+.sectionHeading {
+  padding: 2rem 0;
+}
+
+.clientSection {
+  background-color: black;
+  color: white;
+  text-align: center;
+
+  .sectionRow {
+    &.row1 {
+      flex-direction: row-reverse;
+
+      .imagePane {
+        background: url('../../../public/images/drive.jpg') no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.row2 {
+      .imagePane {
+        background: url('../../../public/images/notifications.jpg') no-repeat center;
+        background-size: cover;
+      }
+    }
+  }
+}
+
+.barberSection {
+  text-align: center;
+
+  .sectionRow {
+    &.row1 {
+      flex-direction: row-reverse;
+
+      .imagePane {
+        background: url('../../../public/images/scheduling.jpg') no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.row2 {
+      .imagePane {
+        background: url('../../../public/images/rate.jpg') no-repeat center;
+        background-size: cover;
+      }
+    }
+
+    &.row3 {
+      flex-direction: row-reverse;
+
+      .imagePane {
+        background: url('../../../public/images/instagram.jpg') no-repeat center;
+        background-size: cover;
+      }
+    }
   }
 }

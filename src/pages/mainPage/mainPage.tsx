@@ -1,13 +1,16 @@
 import Navbar from '../../components/navbar/navbar';
 import Home from '../home/home';
 import About from '../about/about';
+import { useRef } from 'react';
 
 const MainPage = () => {
+  const ref = useRef<HTMLElement>(null);
+
   return (
     <>
-      <Navbar />
+      <Navbar ref={ref} />
       <Home />
-      <About />
+      <About ref={ref} />
     </>
   );
 };
