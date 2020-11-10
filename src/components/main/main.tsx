@@ -1,9 +1,9 @@
-import Navbar, { NavRefObject } from '../../components/navbar/navbar';
+import Navbar, { NavRefObject } from '../navbar/navbar';
 import Home from '../home/home';
 import About from '../about/about';
 import { useRef } from 'react';
 
-const MainPage = () => {
+const Main = () => {
   const homeRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
 
@@ -21,4 +21,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Main;

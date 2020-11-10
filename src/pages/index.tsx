@@ -1,20 +1,20 @@
 import Head from 'next/head';
 import styles from '../styles/main.module.scss';
-import MainPage from './mainPage/mainPage';
+import Main from '../components/main/main';
 
-const Main = () => {
+const Index = () => {
   return (
     <>
       <div className={styles.container}>
         <Head>
           <title>Barberus</title>
         </Head>
-        <MainPage />
+        <Main />
       </div>
     </>
   );
 };
 
-Main.displayName = 'Main';
+Index.displayName = 'Main';
 
-export default Main;
+export default Index;

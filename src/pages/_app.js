@@ -1,6 +1,6 @@
 import '../styles/globals.scss';
 
-function BarberusApp(
+function BarberusApp (
   { Component, pageProps }
 ) {
   return <Component {...pageProps} />;
