@@ -4,32 +4,42 @@
   justify-content: center;
   align-items: center;
 
-  .question {
-    font-size: 20pt;
+  .question,
+  .divider {
+    font-size: 50pt;
+    font-weight: bold;
+    font-family: 'Poppins';
+  }
+
+  .divider {
+    text-decoration: underline;
   }
 
   .barberBlock {
     margin: 10px 0;
   }
 
-  .userButton {
+  .userButton,
+  .goBackButton {
     border: 2px solid #000;
     color: black;
+    font-size: 20pt;
 
     &:hover {
-      transition: 0.5s ease-in-out;
       background-color: black;
-      color: #FFF;
+      color: #fff;
     }
   }
 
-  .form {
+  .goBackButton {
+    font-size: 12pt;
+    margin-top: 2rem;
+  }
+
+  .signupContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
   }
 }
-
-
-

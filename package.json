@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
-
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
@@ -17,7 +16,8 @@
     "react-bootstrap": "^1.4.0",
     "react-dom": "17.0.0",
     "sass": "^1.27.0",
-    "scroll-into-view-if-needed": "^2.2.26"
+    "scroll-into-view-if-needed": "^2.2.26",
+    "swr": "^0.3.8"
   },
   "devDependencies": {
     "@types/node": "^14.14.2",

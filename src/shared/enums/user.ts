@@ -1,4 +1,5 @@
 export enum UserType {
   BARBER = 'Barber',
-  CLIENT = 'Client'
+  CLIENT = 'Client',
+  NONE = 'None'
 }
