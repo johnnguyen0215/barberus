@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
+    "framer-motion": "^2.9.4",
     "next": "9.5.5",
     "react": "17.0.0",
     "react-bootstrap": "^1.4.0",
@@ -22,13 +25,16 @@
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "eslint": "^7.12.0",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-config-standard": "^15.0.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-standard": "^4.0.2",
+    "prettier": "^2.1.2",
     "typescript": "^4.0.3"
   }
 }
