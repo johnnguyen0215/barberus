@@ -20,6 +20,7 @@
   }
 
   .userButton,
+  .submitButton,
   .goBackButton {
     border: 2px solid #000;
     color: black;
@@ -31,7 +32,7 @@
     }
   }
 
-  .goBackButton {
+  .submitButton .goBackButton {
     font-size: 12pt;
     margin-top: 2rem;
   }

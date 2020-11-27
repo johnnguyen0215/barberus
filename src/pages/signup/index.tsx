@@ -1,9 +1,10 @@
-import { FC, ReactElement, ChangeEvent, useState } from 'react';
+import { FC, ReactElement, ChangeEvent, useState, useRef, MouseEvent } from 'react';
 import styles from './signup.module.scss';
 import { UserType } from '../../shared/enums/user';
 import Navbar from '../../components/navbar/navbar';
 import navStyles from '../../components/navbar/navbar.module.scss';
 import environment from '../../shared/environments/environment';
+import ApiService from '../../services/api';
 
 interface QuestionProps {
   onSetUserType: (userType: UserType) => void;
@@ -44,6 +45,8 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [signupError, setSignupError] = useState('');
+  const apiService = useRef(new ApiService(environment.apiUrl));
 
   const handleOnInputChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -54,26 +57,20 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
     }
   };
 
-  const handleSubmit = async () => {
-    let response = null;
+  const handleSubmit = async (event: MouseEvent) => {
+    event.preventDefault();
 
     try {
-      response = await fetch(environment.apiUrl, {
-        method: 'POST',
-        body: JSON.stringify({
-          name,
-          email,
-          password
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      await apiService.current.post(['users'], {
+        name,
+        email,
+        password
       });
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (err) {
+      setSignupError(err?.message);
 
-    console.log(response?.json());
+      throw err;
+    }
   };
 
   return (
@@ -112,7 +109,11 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
       {userType === UserType.CLIENT && (
         <div className={styles.clientForm}>This is the client form</div>
       )}
-      <button onClick={() => handleSubmit()} className={`ghostButton ${styles.submitButton}`}>
+      {signupError && <div className={`${styles.errorContainer}`}>{signupError}</div>}
+      <button
+        onClick={(event) => handleSubmit(event)}
+        className={`ghostButton ${styles.submitButton}`}
+      >
         Submit
       </button>
       <button
