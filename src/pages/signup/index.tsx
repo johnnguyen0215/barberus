@@ -78,7 +78,9 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
       {userType === UserType.BARBER && (
         <>
           <div>
-            <label>Name:</label>
+            <div>
+              <label>Name</label>
+            </div>
             <input
               className={styles.nameInput}
               type="name"
@@ -87,7 +89,9 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
             ></input>
           </div>
           <div>
-            <label>Email:</label>
+            <div>
+              <label>Email:</label>
+            </div>
             <input
               className={styles.emailInput}
               type="email"
@@ -96,7 +100,9 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
             ></input>
           </div>
           <div>
-            <label>Password:</label>
+            <div>
+              <label>Password:</label>
+            </div>
             <input
               className={styles.passwordInput}
               type="password"
@@ -107,21 +113,30 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
         </>
       )}
       {userType === UserType.CLIENT && (
-        <div className={styles.clientForm}>This is the client form</div>
+        <>
+          <h1>Client Signup</h1>
+          <div className={styles.clientForm}>This is the client form</div>
+        </>
       )}
       {signupError && <div className={`${styles.errorContainer}`}>{signupError}</div>}
-      <button
-        onClick={(event) => handleSubmit(event)}
-        className={`ghostButton ${styles.submitButton}`}
-      >
-        Submit
-      </button>
-      <button
-        onClick={() => onSetUserType(UserType.NONE)}
-        className={`ghostButton ${styles.goBackButton}`}
-      >
-        Go Back
-      </button>
+      <div className={styles.buttonContainer}>
+        <div>
+          <button
+            onClick={(event) => handleSubmit(event)}
+            className={`ghostButton ${styles.submitButton}`}
+          >
+            Submit
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={() => onSetUserType(UserType.NONE)}
+            className={`ghostButton ${styles.goBackButton}`}
+          >
+            Go Back
+          </button>
+        </div>
+      </div>
     </form>
   );
 };
@@ -139,11 +154,15 @@ const SignUp: FC = (): ReactElement => {
         </ul>
       </Navbar>
       <div className={styles.signupPage}>
+        <div className={styles.signupBg} />
         <div className={styles.signupContainer}>
           {userType === UserType.NONE ? (
             <Question onSetUserType={setUserType} />
           ) : (
-            <Form onSetUserType={setUserType} userType={userType} />
+            <>
+              <h1>{userType === UserType.BARBER ? 'Barber Signup' : 'Client Signup'}</h1>
+              <Form onSetUserType={setUserType} userType={userType} />
+            </>
           )}
         </div>
       </div>
