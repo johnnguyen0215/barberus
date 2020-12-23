@@ -47,8 +47,6 @@ export default class ApiService {
 
     const data = await response.json();
 
-    console.log('Data: ', data);
-
     return {
       data,
       headers: response.headers

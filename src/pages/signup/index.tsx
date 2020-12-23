@@ -6,6 +6,9 @@ import navStyles from '../../components/navbar/navbar.module.scss';
 import environment from '../../shared/environments/environment';
 import ApiService from '../../services/api';
 import Router from 'next/router';
+import { HandleOnInputChange, HandleOnSubmit, FieldName } from './models';
+import BarberSignupForm from '../../components/signupForm/barber/barberSignupForm';
+import ClientSignupForm from '../../components/signupForm/client/clientSignupForm';
 
 interface QuestionProps {
   onSetUserType: (userType: UserType) => void;
@@ -49,16 +52,26 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
   const [signupError, setSignupError] = useState('');
   const apiService = useRef(new ApiService(environment.apiUrl));
 
-  const handleOnInputChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    handler: (value: string) => void
-  ) => {
-    if (handler) {
-      handler(event.target.value);
+  const handleOnInputChange: HandleOnInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    fieldName: FieldName
+  ): void => {
+    switch (fieldName) {
+      case FieldName.NAME:
+        setName(event.target.value);
+        break;
+      case FieldName.EMAIL:
+        setEmail(event.target.value);
+        break;
+      case FieldName.PASSWORD:
+        setPassword(event.target.value);
+        break;
+      default:
+        return;
     }
   };
 
-  const handleSubmit = async (event: MouseEvent) => {
+  const handleSubmit: HandleOnSubmit = async (event: MouseEvent): Promise<void> => {
     event.preventDefault();
 
     try {
@@ -77,52 +90,23 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
   };
 
   return (
-    <form className={styles.signupForm}>
+    <>
       {userType === UserType.BARBER && (
-        <>
-          <div className={styles.inputSection}>
-            <div>
-              <label>Name</label>
-            </div>
-            <input
-              className="inputField"
-              type="name"
-              value={name}
-              onChange={(event) => handleOnInputChange(event, setName)}
-            ></input>
-            <span className="underline"></span>
-          </div>
-          <div className={styles.inputSection}>
-            <div>
-              <label>Email</label>
-            </div>
-            <input
-              className="inputField"
-              type="email"
-              value={email}
-              onChange={(event) => handleOnInputChange(event, setEmail)}
-            ></input>
-          </div>
-          <div className={styles.inputSection}>
-            <div>
-              <label>Password</label>
-            </div>
-            <input
-              className="inputField"
-              type="password"
-              value={password}
-              onChange={(event) => handleOnInputChange(event, setPassword)}
-            ></input>
-          </div>
-        </>
+        <BarberSignupForm
+          name={name}
+          email={email}
+          password={password}
+          handleOnInputChange={handleOnInputChange}
+        />
       )}
       {userType === UserType.CLIENT && (
-        <>
-          <h1>Client Signup</h1>
-          <div className={styles.clientForm}>This is the client form</div>
-        </>
+        <ClientSignupForm
+          name={name}
+          email={email}
+          password={password}
+          handleOnInputChange={handleOnInputChange}
+        />
       )}
-      {signupError && <div className={`${styles.errorContainer}`}>{signupError}</div>}
       <div className={styles.buttonContainer}>
         <div>
           <button
@@ -141,7 +125,7 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
           </button>
         </div>
       </div>
-    </form>
+    </>
   );
 };
 
