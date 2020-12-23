@@ -61,6 +61,14 @@
     align-items: center;
   }
 
+  form {
+    width: 20rem;
+
+    .inputSection {
+      margin-bottom: 1rem;
+    }
+  }
+
   .buttonContainer {
     display: flex;
     flex-direction: column;

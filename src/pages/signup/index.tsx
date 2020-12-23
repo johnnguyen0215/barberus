@@ -5,6 +5,7 @@ import Navbar from '../../components/navbar/navbar';
 import navStyles from '../../components/navbar/navbar.module.scss';
 import environment from '../../shared/environments/environment';
 import ApiService from '../../services/api';
+import Router from 'next/router';
 
 interface QuestionProps {
   onSetUserType: (userType: UserType) => void;
@@ -66,6 +67,8 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
         email,
         password
       });
+
+      Router.push('/barber');
     } catch (err) {
       setSignupError(err?.message);
 
@@ -77,34 +80,35 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
     <form className={styles.signupForm}>
       {userType === UserType.BARBER && (
         <>
-          <div>
+          <div className={styles.inputSection}>
             <div>
               <label>Name</label>
             </div>
             <input
-              className={styles.nameInput}
+              className="inputField"
               type="name"
               value={name}
               onChange={(event) => handleOnInputChange(event, setName)}
             ></input>
+            <span className="underline"></span>
           </div>
-          <div>
+          <div className={styles.inputSection}>
             <div>
-              <label>Email:</label>
+              <label>Email</label>
             </div>
             <input
-              className={styles.emailInput}
+              className="inputField"
               type="email"
               value={email}
               onChange={(event) => handleOnInputChange(event, setEmail)}
             ></input>
           </div>
-          <div>
+          <div className={styles.inputSection}>
             <div>
-              <label>Password:</label>
+              <label>Password</label>
             </div>
             <input
-              className={styles.passwordInput}
+              className="inputField"
               type="password"
               value={password}
               onChange={(event) => handleOnInputChange(event, setPassword)}

@@ -1,4 +1,4 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 @font-face {
   font-family: 'Lato';
@@ -24,7 +24,8 @@ body {
   margin: 0;
 }
 
-body, body * {
+body,
+body * {
   font-family: 'Lato';
 }
 
@@ -35,6 +36,21 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.inputField {
+  border: 0;
+  border-bottom: 2px solid #000;
+  width: 100%;
+
+  &::before {
+    width: 100%;
+    background-color: red;
+  }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .ghostButton {
