@@ -1,10 +1,14 @@
-import { FC } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import signupStyles from '../signupForm.module.scss';
 import { TextField } from '@material-ui/core';
 import { SignupFormProps } from '../models';
 import { FieldName } from '../../../pages/signup/models';
+import { UserContext } from '../../../contexts/userContext';
+import axios from 'axios';
 
 const BarberSignupForm: FC<SignupFormProps> = ({ name, email, password, handleOnInputChange }) => {
+  const userContext = useContext(UserContext);
+
   return (
     <form className={signupStyles.signupForm}>
       <div className={signupStyles.inputSection}>

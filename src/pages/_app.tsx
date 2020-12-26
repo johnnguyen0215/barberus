@@ -17,7 +17,7 @@ const BarberusApp = ({ Component, pageProps }: AppProps): ReactElement => {
         getUserInfo
       }}
     >
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </UserContext.Provider>
   );
 };

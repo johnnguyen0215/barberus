@@ -9,6 +9,8 @@ import Router from 'next/router';
 import { HandleOnInputChange, HandleOnSubmit, FieldName } from './models';
 import BarberSignupForm from '../../components/signupForm/barber/barberSignupForm';
 import ClientSignupForm from '../../components/signupForm/client/clientSignupForm';
+import { Backdrop, Snackbar } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 
 interface QuestionProps {
   onSetUserType: (userType: UserType) => void;
@@ -49,7 +51,7 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [signupError, setSignupError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const apiService = useRef(new ApiService(environment.apiUrl));
 
   const handleOnInputChange: HandleOnInputChange = (
@@ -83,9 +85,7 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
 
       Router.push('/barber');
     } catch (err) {
-      setSignupError(err?.message);
-
-      throw err;
+      setErrorMessage(err.message);
     }
   };
 
@@ -107,6 +107,9 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
           handleOnInputChange={handleOnInputChange}
         />
       )}
+      <Snackbar open={!!errorMessage}>
+        <Alert severity="error">{errorMessage}</Alert>
+      </Snackbar>
       <div className={styles.buttonContainer}>
         <div>
           <button

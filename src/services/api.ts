@@ -1,3 +1,9 @@
+import axios from 'axios';
+
+export type QueryParams = {
+  [name: string]: string;
+};
+
 export default class ApiService {
   baseUrl = '';
 
@@ -5,7 +11,7 @@ export default class ApiService {
     this.baseUrl = baseUrl;
   }
 
-  async get(routeParams: string[], queryParams: string[]): Promise<unknown> {
+  async get(routeParams: string[], queryParams: QueryParams): Promise<unknown> {
     let response = null;
 
     let url = this.baseUrl;
@@ -14,18 +20,13 @@ export default class ApiService {
       url += `/${routeParams.join('/')}`;
     }
 
-    if (queryParams) {
-      url += `?${queryParams.join('&')}`;
+    try {
+      response = await axios.get(url, { params: { ...queryParams } });
+    } catch (err) {
+      throw new Error(err.response);
     }
 
-    response = await fetch(url);
-
-    const data = await response.json();
-
-    return {
-      data,
-      headers: response.headers
-    };
+    return response;
   }
 
   async post(routeParams: string[], body: unknown): Promise<unknown> {
@@ -37,19 +38,13 @@ export default class ApiService {
       url += `/${routeParams.join('/')}`;
     }
 
-    response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    });
+    try {
+      response = await axios.post(url, body);
+    } catch (err) {
+      const errorMsg = err?.response?.data?.message;
+      throw new Error(errorMsg);
+    }
 
-    const data = await response.json();
-
-    return {
-      data,
-      headers: response.headers
-    };
+    return response;
   }
 }

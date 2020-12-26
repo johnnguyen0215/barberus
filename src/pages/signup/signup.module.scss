@@ -33,6 +33,14 @@
   .goBackButton {
     border: 2px solid #000;
     font-size: 20pt;
+    color: #000;
+    background-color: transparent;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+      background-color: #000;
+    }
   }
 
   .submitButton,
