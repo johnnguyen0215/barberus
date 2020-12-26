@@ -25,6 +25,8 @@ const Main: FC = (): ReactElement => {
     }
   };
 
+  console.log('main');
+
   return (
     <>
       <Navbar>

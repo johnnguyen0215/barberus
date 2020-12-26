@@ -1,4 +1,4 @@
-import { FC, ReactElement, ChangeEvent, useState, useRef, MouseEvent } from 'react';
+import { FC, ReactElement, ChangeEvent, useState, useRef, MouseEvent, useContext } from 'react';
 import styles from './signup.module.scss';
 import { UserType } from '../../shared/enums/user';
 import Navbar from '../../components/navbar/navbar';
@@ -9,8 +9,8 @@ import Router from 'next/router';
 import { HandleOnInputChange, HandleOnSubmit, FieldName } from './models';
 import BarberSignupForm from '../../components/signupForm/barber/barberSignupForm';
 import ClientSignupForm from '../../components/signupForm/client/clientSignupForm';
-import { Backdrop, Snackbar } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { ErrorContext } from '../../contexts/errorContext';
+import { PendingContext } from '../../contexts/pendingContext';
 
 interface QuestionProps {
   onSetUserType: (userType: UserType) => void;
@@ -51,8 +51,10 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const apiService = useRef(new ApiService(environment.apiUrl));
+
+  const { setErrorMessage, setShowError } = useContext(ErrorContext);
+  const { setPending } = useContext(PendingContext);
 
   const handleOnInputChange: HandleOnInputChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -77,6 +79,8 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
     event.preventDefault();
 
     try {
+      setPending(true);
+
       await apiService.current.post(['users'], {
         name,
         email,
@@ -86,7 +90,10 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
       Router.push('/barber');
     } catch (err) {
       setErrorMessage(err.message);
+      setShowError(true);
     }
+
+    setPending(false);
   };
 
   return (
@@ -107,9 +114,6 @@ const Form: FC<FormProps> = ({ userType, onSetUserType }) => {
           handleOnInputChange={handleOnInputChange}
         />
       )}
-      <Snackbar open={!!errorMessage}>
-        <Alert severity="error">{errorMessage}</Alert>
-      </Snackbar>
       <div className={styles.buttonContainer}>
         <div>
           <button
