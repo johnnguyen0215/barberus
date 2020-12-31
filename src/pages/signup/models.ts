@@ -7,6 +7,10 @@ export type HandleOnInputChange = (
 
 export type HandleOnSubmit = (event: MouseEvent) => Promise<void>;
 
+export type HandleOnSpecsChange = (
+  event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => void;
+
 export enum FieldName {
   NAME = 'name',
   EMAIL = 'email',

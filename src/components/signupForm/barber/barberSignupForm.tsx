@@ -1,19 +1,31 @@
-import { FC, useContext, useEffect } from 'react';
-import signupStyles from '../signupForm.module.scss';
-import { TextField } from '@material-ui/core';
+import { FC, useContext, useRef } from 'react';
+import styles from '../signupForm.module.scss';
+import { TextField, Chip } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 import { SignupFormProps } from '../models';
-import { FieldName } from '../../../pages/signup/models';
+import { FieldName, HandleOnSpecsChange } from '../../../pages/signup/models';
 import { UserContext } from '../../../contexts/userContext';
-import axios from 'axios';
+import { specializations } from '../../../shared/constants/specializations';
 
-const BarberSignupForm: FC<SignupFormProps> = ({ name, email, password, handleOnInputChange }) => {
+interface BarberSignupFormProps extends SignupFormProps {
+  handleOnSpecsChange: HandleOnSpecsChange;
+}
+
+const BarberSignupForm: FC<BarberSignupFormProps> = ({
+  name,
+  email,
+  password,
+  handleOnInputChange,
+  handleOnSpecsChange
+}) => {
   const userContext = useContext(UserContext);
+  const specializationValues = useRef([]);
 
   return (
-    <form className={signupStyles.signupForm}>
-      <div className={signupStyles.inputSection}>
+    <form className={styles.signupForm}>
+      <div className={styles.inputSection}>
         <TextField
-          className={signupStyles.registrationField}
+          className={styles.registrationField}
           id="name-field"
           label="Name"
           type="text"
@@ -22,9 +34,9 @@ const BarberSignupForm: FC<SignupFormProps> = ({ name, email, password, handleOn
           required={true}
         />
       </div>
-      <div className={signupStyles.inputSection}>
+      <div className={styles.inputSection}>
         <TextField
-          className={signupStyles.registrationField}
+          className={styles.registrationField}
           id="email-field"
           label="Email"
           type="email"
@@ -33,15 +45,29 @@ const BarberSignupForm: FC<SignupFormProps> = ({ name, email, password, handleOn
           required={true}
         />
       </div>
-      <div className={signupStyles.inputSection}>
+      <div className={styles.inputSection}>
         <TextField
-          className={signupStyles.registrationField}
+          className={styles.registrationField}
           id="password-field"
           label="Password"
           type="password"
           onChange={(event) => handleOnInputChange(event, FieldName.PASSWORD)}
           value={password}
           required={true}
+        />
+      </div>
+      <div className={styles.inputSection}>
+        <Autocomplete
+          id="specializations-combo"
+          options={specializations}
+          value={specializationValues.current}
+          onChange={handleOnSpecsChange}
+          limitTags={3}
+          freeSolo={true}
+          multiple={true}
+          renderInput={(params) => (
+            <TextField {...params} label="Specializations" variant="outlined" />
+          )}
         />
       </div>
     </form>
